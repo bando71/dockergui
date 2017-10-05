@@ -16,7 +16,7 @@ Additionally xrdp is installed and the container can be accessed using any rdp c
   
 ```
 # Builds a docker gui image
-FROM hurricane/dockergui:xvnc
+FROM danielguerra/dockergui
 
 #########################################
 ##        ENVIRONMENTAL CONFIG         ##
@@ -41,8 +41,8 @@ CMD ["/sbin/my_init"]
 #########################################
 ##    REPOSITORIES AND DEPENDENCIES    ##
 #########################################
-echo 'deb http://archive.ubuntu.com/ubuntu trusty main universe restricted' > /etc/apt/sources.list
-echo 'deb http://archive.ubuntu.com/ubuntu trusty-updates main universe restricted' >> /etc/apt/sources.list
+RUN echo 'deb http://archive.ubuntu.com/ubuntu trusty main universe restricted' > /etc/apt/sources.list
+RUN echo 'deb http://archive.ubuntu.com/ubuntu trusty-updates main universe restricted' >> /etc/apt/sources.list
 
 # Install packages needed for app
 
@@ -51,6 +51,8 @@ echo 'deb http://archive.ubuntu.com/ubuntu trusty-updates main universe restrict
 #########################################
 
 # Install steps for X app
+RUN apt-get update
+RUN apt-get install mypackages
 
 # Copy X app start script to right location
 COPY startapp.sh /startapp.sh
@@ -75,7 +77,7 @@ This environment variable is used to set the [TimeZone] of the container.
 ## Build from docker file (Info only, not required.):
 
 ```
-git clone --depth=1 https://github.com/hurricanehernandez/dockergui.git 
-cd tmm
+git clone -b xrdp --depth=1 https://github.com/danielguerra/dockergui.git 
+cd dockergui
 docker build --rm=true -t dockergui . 
 ```

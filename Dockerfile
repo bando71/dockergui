@@ -1,6 +1,6 @@
 # dockergui
 FROM phusion/baseimage:0.9.17
-MAINTAINER Carlos Hernandez <carlos@techbyte.ca>
+MAINTAINER Daniel Guerra
 
 #########################################
 ##        ENVIRONMENTAL CONFIG         ##
@@ -17,3 +17,4 @@ CMD ["/sbin/my_init"]
 #########################################
 COPY ./files/ /tmp/
 RUN chmod +x /tmp/install/install.sh && /tmp/install/install.sh && rm -r /tmp/install
+EXPOSE 3389
