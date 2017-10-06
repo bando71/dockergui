@@ -16,4 +16,6 @@ CMD ["/sbin/my_init"]
 ##         RUN INSTALL SCRIPT          ##
 #########################################
 COPY ./files/ /tmp/
-RUN chmod +x /tmp/install/install.sh && /tmp/install/install.sh && rm -r /tmp/install
+RUN chmod a+x /tmp/install/install.sh
+RUN /tmp/install/install.sh
+RUN rm -r /tmp/install
